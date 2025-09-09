@@ -1,31 +1,27 @@
+/* Add these to your existing globals.css file */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  
   &.no-scroll {
     overflow: hidden;
   }
 }
 
 @layer components {
-  
   .theming {
-
     #dark:checked {
-
       +label {
         transform: translate(42px, -50%);
       }
 
       ~#light {
-
         +label {
           z-index: 20;
         }
@@ -36,4 +32,183 @@ body {
   .word-break-word {
     word-break: break-word;
   }
+
+  /* Enhanced animations for better UX */
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slideIn {
+    animation: slideIn 0.3s ease-out forwards;
+  }
+
+  .animate-scaleIn {
+    animation: scaleIn 0.2s ease-out forwards;
+  }
+
+  /* Text line clamping utility */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Enhanced glass morphism effect */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Improved button states */
+  .btn-primary {
+    @apply bg-gradient-to-r from-purple_main to-purple-600 hover:from-purple-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply bg-white dark:bg-dark_heading border-2 border-purple_main text-purple_main hover:bg-purple_main hover:text-white transition-all duration-300;
+  }
+
+  /* Enhanced form inputs */
+  .input-enhanced {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-dark_heading text-heading_main dark:text-dark_heading_main transition-all duration-300 focus:border-purple_main focus:ring-4 focus:ring-purple_main focus:ring-opacity-20 outline-none;
+  }
+
+  .input-error {
+    @apply border-red-400 bg-red-50 dark:bg-red-900 dark:bg-opacity-20 focus:border-red-400 focus:ring-red-400;
+  }
+
+  .input-success {
+    @apply border-green-400 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 focus:border-green-400 focus:ring-green-400;
+  }
+
+  /* Enhanced card styles */
+  .card-enhanced {
+    @apply bg-white dark:bg-dark_heading rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+
+  /* Loading spinner */
+  .spinner {
+    @apply animate-spin rounded-full border-4 border-gray-200 border-t-purple_main;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Enhanced scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #2d3748;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4a5568;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #718096;
+}
+
+  /* Enhanced focus states for accessibility */
+.focus-enhanced:focus {
+  @apply ring-4 ring-purple_main ring-opacity-20 outline-none;
+}
+
+/* Force minimum heights for mobile/tablet form controls */
+@media (max-width: 1023px) {
+  button, input[type="text"], input[type="url"] {
+    min-height: 4rem !important; /* 64px */
+  }
+}
+
+@media (min-width: 1024px) {
+  button, input[type="text"], input[type="url"] {
+    min-height: 3.5rem !important; /* 56px */
+  }
+}
+
+/* Specific overrides for download component */
+.download-component button,
+.download-component input {
+  min-height: 4rem; /* 64px for mobile by default */
+}
+
+@media (min-width: 1024px) {
+  .download-component button,
+  .download-component input {
+    min-height: 3.5rem; /* 56px for desktop */
+  }
+}
+
+/* Improved transitions for theme switching */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
 }
