@@ -9,7 +9,7 @@ import { useBetterMediaQuery } from '@/app/_client/libs/hooks/useBetterMediaQuer
 
 export const Header = () => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [isNavigating, setIsNavigating] = useState(false)
+  // Remove isNavigating state since we don't need loading animations
   const matches = useBetterMediaQuery('(min-width: 1024px)')
 
   useEffect(() => {
@@ -20,13 +20,7 @@ export const Header = () => {
     }
   }, [isExpanded])
 
-  const handleNavigate = () => {
-    setIsNavigating(true)
-    setTimeout(() => {
-      setIsNavigating(false)
-    }, 500)
-  }
-
+  // Remove handleNavigate function since we don't need it
   const handleCloseNav = () => {
     setIsExpanded(false)
   }
@@ -71,7 +65,7 @@ export const Header = () => {
           <Link
             className="text-purple_main font-bold text-base lg:text-[42px] lg:leading-normal relative z-10"
             href="/"
-            onClick={handleNavigate}
+            // Remove onClick handler since we don't need loading state
           >
             <motion.span
               whileHover={{ 
@@ -118,14 +112,16 @@ export const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.1 }}
             >
-              <HeaderNav onNavigate={handleNavigate} />
+              {/* Remove onNavigate prop since we don't need loading */}
+              <HeaderNav />
               <div className="ml-4">
                 <Theming />
               </div>
             </motion.div>
           )}
 
-          {/* Loading indicator */}
+          {/* REMOVE LOADING INDICATOR - No longer needed */}
+          {/* 
           <AnimatePresence>
             {isNavigating && (
               <motion.div
@@ -137,6 +133,7 @@ export const Header = () => {
               />
             )}
           </AnimatePresence>
+          */}
         </motion.div>
       </header>
 
@@ -162,31 +159,7 @@ export const Header = () => {
               animate="visible"
               exit="hidden"
             >
-              <div className="h-full flex flex-col">
-                <HeaderNav onClose={handleCloseNav} onNavigate={handleNavigate} />
-                
-                {/* Theme selector */}
-                <motion.div
-                  className="px-4 pb-8"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.3 }}
-                >
-                  <div className="flex items-center justify-center">
-                    <Theming />
-                  </div>
-                </motion.div>
-
-                {/* Footer decoration */}
-                <div className="mt-auto p-4">
-                  <motion.div
-                    className="h-1 bg-gradient-to-r from-purple_main to-blue-500 rounded-full"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ delay: 0.5, duration: 0.5 }}
-                  />
-                </div>
-              </div>
+              <HeaderNav onClose={handleCloseNav} />
             </motion.div>
           </>
         )}
