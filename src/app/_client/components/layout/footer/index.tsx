@@ -74,7 +74,7 @@ export const Footer = () =>{
       </div>
       <div className="lg:basis-full p-4">
         <div className="border-t-2 pt-16 border-t-gray-200 dark:border-t-gray-800">
-          <p className="font-light text-sm text-base_one dark:text-dark_base_one">Copyright © 2022 All Rights Reseved.</p>
+          <p className="font-light text-sm text-base_one dark:text-dark_base_one">Copyright © { new Date().getFullYear() } All Rights Reseved.</p>
         </div>
       </div>
     </footer>

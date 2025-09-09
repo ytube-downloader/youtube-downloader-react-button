@@ -35,7 +35,7 @@ export const Features = ({ vda }: FeaturesProps) =>{
   return (
     <div className="lg:px-20 mb-32">
       <div className="text-center mb-10 lg:mb-16">
-        <p className="text-purple_main font-bold text-[10px] mb-6">{ translate("tag") }</p>
+        <p className="text-purple_main font-bold text-[30px] mb-6">{ translate("tag") }</p>
         <h2 className="text-[42px] lg:text-[51px] text-heading_main dark:text-dark_heading_main font-black leading-tight">{ translate("title") }</h2>
       </div>
       <ul className="gap-5 lg:gap-8 grid lg:grid-cols-3">
