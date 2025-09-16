@@ -234,7 +234,7 @@ export const Download = () => {
           {/* Format Selection and Download Section */}
           <div className="flex flex-col lg:flex-row gap-4">
             {/* Format Selection */}
-            <div className="relative lg:min-w-[200px]">
+            <div className="relative lg:min-w-[300px]">
               <button
                 className={`w-full h-14 px-6 rounded-2xl font-bold text-white bg-gradient-to-r from-purple_main to-purple-600 hover:from-purple-600 hover:to-purple-700 transition-all duration-300 flex items-center justify-between shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 ${
                   isLoading ? "opacity-50 cursor-not-allowed" : ""

@@ -20,8 +20,8 @@ Before setting up the project, make sure you have the following tools installed:
 Start by cloning the repository to your local machine.
 
 ```bash
-git clone https://github.com/kulikov-debug/youtube-download-react-button-template
-cd your-repository
+git clone https://github.com/ytube-downloader/download-react-button-template
+cd download-react-button-template
 ```
 
 ## 2. Install Dependencies
