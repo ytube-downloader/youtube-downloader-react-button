@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 type HeaderNavProps = {
   onClose?: VoidFunction
-  onNavigate?: () => void
+  // Remove onNavigate prop since we don't need loading
 }
 
 const links = [
@@ -42,22 +42,13 @@ const links = [
   }
 ]
 
-export const HeaderNav = ({ onClose, onNavigate }: HeaderNavProps) => {
+export const HeaderNav = ({ onClose }: HeaderNavProps) => {
   const pathname = usePathname()
   const [hoveredLink, setHoveredLink] = useState<string | null>(null)
-  const [isNavigating, setIsNavigating] = useState(false)
 
   const handleLinkClick = (href: string) => {
-    if (href !== pathname) {
-      setIsNavigating(true)
-      // Trigger loading state
-      if (onNavigate) {
-        onNavigate()
-      }
-      // Close mobile menu
-      if (onClose) {
-        setTimeout(onClose, 100)
-      }
+    if (onClose) {
+      setTimeout(onClose, 100)
     }
   }
 
@@ -78,7 +69,7 @@ export const HeaderNav = ({ onClose, onNavigate }: HeaderNavProps) => {
             href={link.link}
             className={`group relative block px-4 py-3 lg:px-3 lg:py-2 rounded-xl font-medium transition-all duration-300 ${
               isActive 
-                ? "text-purple_main bg-purple_main bg-opacity-10 lg:bg-transparent" 
+                ? "text-purple_main bg-purple_main bg-opacity-10 font-semibold" 
                 : "text-heading_main dark:text-dark_heading_main hover:text-purple_main"
             }`}
             onMouseEnter={() => setHoveredLink(link.link)}
@@ -87,47 +78,21 @@ export const HeaderNav = ({ onClose, onNavigate }: HeaderNavProps) => {
           >
             <div className="flex items-center gap-3 lg:justify-center">
               <span className="text-lg lg:hidden">{link.icon}</span>
-              <span className="relative">
-                {link.label}
-                
-                {/* Active indicator */}
-                {isActive && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple_main rounded-full lg:block hidden"
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  />
-                )}
-                
-                {/* Hover effect */}
-                <AnimatePresence>
-                  {isHovered && !isActive && (
-                    <motion.div
-                      initial={{ scaleX: 0, opacity: 0 }}
-                      animate={{ scaleX: 1, opacity: 1 }}
-                      exit={{ scaleX: 0, opacity: 0 }}
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple_main bg-opacity-50 rounded-full hidden lg:block"
-                      transition={{ duration: 0.2 }}
-                    />
-                  )}
-                </AnimatePresence>
-              </span>
+              <span className="lg:text-sm">{link.label}</span>
             </div>
-
-            {/* Mobile hover background */}
+            
             <AnimatePresence>
-              {isHovered && (
+              {(isHovered && !isActive) && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
-                  className="absolute inset-0 bg-purple_main bg-opacity-5 rounded-xl lg:hidden"
+                  className="absolute inset-0 bg-purple_main bg-opacity-5 rounded-xl"
                   transition={{ duration: 0.2 }}
                 />
               )}
             </AnimatePresence>
 
-            {/* Ripple effect on click */}
             <div className="absolute inset-0 rounded-xl overflow-hidden">
               <div className="absolute inset-0 bg-purple_main opacity-0 group-active:opacity-10 transition-opacity duration-150" />
             </div>
@@ -167,58 +132,9 @@ export const HeaderNav = ({ onClose, onNavigate }: HeaderNavProps) => {
       {/* Navigation Links */}
       <ul className="font-light text-center lg:flex lg:items-center lg:font-medium lg:gap-x-2 border-b-2 lg:border-none pb-8 lg:pb-0 mb-10 lg:mb-0 border-b-gray-200 dark:border-b-gray-800">
         {renderLinks()}
-        
-        {/* Contact Link (Mobile Only) */}
-        <motion.li
-          className="mb-6 lg:hidden"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: links.length * 0.1, duration: 0.3 }}
-        >
-          <Link 
-            href="/contact"
-            className="group relative block px-4 py-3 rounded-xl font-medium text-heading_main dark:text-dark_heading_main hover:text-purple_main transition-all duration-300"
-            onMouseEnter={() => setHoveredLink('/contact')}
-            onMouseLeave={() => setHoveredLink(null)}
-          >
-            <div className="flex items-center gap-3">
-              <span className="text-lg">📧</span>
-              <span>Contact</span>
-            </div>
-            
-            {/* Hover background */}
-            <AnimatePresence>
-              {hoveredLink === '/contact' && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  className="absolute inset-0 bg-purple_main bg-opacity-5 rounded-xl"
-                  transition={{ duration: 0.2 }}
-                />
-              )}
-            </AnimatePresence>
-          </Link>
-        </motion.li>
       </ul>
 
-      {/* Loading indicator */}
-      <AnimatePresence>
-        {isNavigating && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-white dark:bg-dark_heading bg-opacity-50 backdrop-blur-sm flex items-center justify-center lg:hidden"
-          >
-            <div className="bg-purple_main bg-opacity-10 rounded-2xl p-4">
-              <div className="w-6 h-6 border-2 border-purple_main border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
-      {/* Background decoration for mobile */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-purple_main to-blue-500 opacity-5 rounded-bl-full lg:hidden" />
     </nav>
   )
