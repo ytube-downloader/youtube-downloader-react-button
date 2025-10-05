@@ -4,7 +4,7 @@ Welcome to this project! This guide will walk you through the steps to set up th
 
 ## Screenshot
 
-![React Button Template](/React-Button-Template.png)
+![React Button Template](./public/React-Button-Template.png)
 
 ---
 
