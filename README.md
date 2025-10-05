@@ -2,6 +2,10 @@
 
 Welcome to this project! This guide will walk you through the steps to set up the project locally, customize the color scheme, and change the Ad URL used in the iframe.
 
+## Screenshot
+
+![React Button Template](/React-Button-Template.png)
+
 ---
 
 ## Prerequisites
